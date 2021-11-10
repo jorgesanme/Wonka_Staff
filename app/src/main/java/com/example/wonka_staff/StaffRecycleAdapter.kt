@@ -7,10 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wonka_staff.databinding.StaffItemBinding
 import com.example.wonka_staff.models.testModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import okhttp3.OkHttpClient
 import okhttp3.Request
 
@@ -40,7 +37,7 @@ data class StaffViewHolder(val binding: StaffItemBinding) : RecyclerView.ViewHol
         binding.lastName.text = person.lastName
         binding.gender.text = person.gender
 
-        val job = GlobalScope.launch {
+        val job = CoroutineScope(Dispatchers.Main).launch {
             val bitmap = downloadImage(person.image)
             withContext(Dispatchers.Main) {
                         binding.avatarView.setImageBitmap(bitmap)
