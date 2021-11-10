@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -57,6 +58,7 @@ dependencies {
 
     /** Moshi **/
     implementation 'com.squareup.moshi:moshi-kotlin:1.11.0'
+    kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.11.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     /**Unit test **/

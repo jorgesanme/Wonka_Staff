@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wonka_staff.databinding.StaffItemBinding
+import com.example.wonka_staff.models.StaffModel
 import com.example.wonka_staff.models.testModel
 import kotlinx.coroutines.*
 import okhttp3.OkHttpClient
