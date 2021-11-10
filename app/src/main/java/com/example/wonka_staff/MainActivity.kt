@@ -35,6 +35,42 @@ class MainActivity : AppCompatActivity() {
                 gender = "M",
                 image = "https://s3.eu-central-1.amazonaws.com/napptilus/level-test/3.jpg" ,
             ),
+            testModel(
+                firstName = "jorge",
+                lastName = "san",
+                gender = "M",
+                image = "https://s3.eu-central-1.amazonaws.com/napptilus/level-test/1.jpg" ,
+            ),
+            testModel(
+                firstName = "Weo",
+                lastName = "Mar",
+                gender = "F",
+                image = "https://s3.eu-central-1.amazonaws.com/napptilus/level-test/2.jpg ",
+            ),
+            testModel(
+                firstName = "Emi",
+                lastName = "Ko",
+                gender = "M",
+                image = "https://s3.eu-central-1.amazonaws.com/napptilus/level-test/3.jpg" ,
+            ),
+            testModel(
+                firstName = "jorge",
+                lastName = "san",
+                gender = "M",
+                image = "https://s3.eu-central-1.amazonaws.com/napptilus/level-test/1.jpg" ,
+            ),
+            testModel(
+                firstName = "Weo",
+                lastName = "Mar",
+                gender = "F",
+                image = "https://s3.eu-central-1.amazonaws.com/napptilus/level-test/2.jpg ",
+            ),
+            testModel(
+                firstName = "Emi",
+                lastName = "Ko",
+                gender = "M",
+                image = "https://s3.eu-central-1.amazonaws.com/napptilus/level-test/3.jpg" ,
+            ),
         )
     }
 }

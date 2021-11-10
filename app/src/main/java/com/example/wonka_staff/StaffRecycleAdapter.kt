@@ -1,11 +1,16 @@
 package com.example.wonka_staff
 
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wonka_staff.databinding.StaffItemBinding
 import com.example.wonka_staff.models.testModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import okhttp3.Request
 
@@ -35,13 +40,22 @@ data class StaffViewHolder(val binding: StaffItemBinding) : RecyclerView.ViewHol
         binding.lastName.text = person.lastName
         binding.gender.text = person.gender
 
-        val okHttpClient = OkHttpClient()
-        val request = Request.Builder().url(person.image).build()
+        val job = GlobalScope.launch {
+            val bitmap = downloadImage(person.image)
+            withContext(Dispatchers.Main) {
+                        binding.avatarView.setImageBitmap(bitmap)
+            }
+        }
 
-        val response = okHttpClient.newCall(request).execute()
-
-        val bitmap = BitmapFactory.decodeStream(response.body!!.byteStream())
-        binding.avatarView.setImageBitmap(bitmap)
+    }
+    private suspend fun downloadImage(url: String): Bitmap{
+        return withContext(Dispatchers.IO){
+            val okHttpClient = OkHttpClient()
+            val request = Request.Builder().url(url).build()
+            val response = okHttpClient.newCall(request).execute()
+            val bitmap = BitmapFactory.decodeStream(response.body!!.byteStream())
+            bitmap
+        }
 
     }
 }
