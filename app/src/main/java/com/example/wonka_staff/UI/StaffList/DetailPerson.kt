@@ -2,6 +2,7 @@ package com.example.wonka_staff.UI.StaffList
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.bumptech.glide.Glide
 import com.example.wonka_staff.databinding.ActivityDetailPersonBinding
 import com.example.wonka_staff.models.PersonModel
 import com.example.wonka_staff.repository.WillyWonkaAPI
@@ -42,10 +43,30 @@ class DetailPerson() : AppCompatActivity() {
 
     }
     private fun initView(personDetail: PersonModel) {
-        binding.personID.text = personDetail.first_name
+        with(binding){
+            nameTextView.text = personDetail.first_name
+            surnameTextView.text = personDetail.last_name
+            Glide.with(root).load(personDetail.image).also { it.circleCrop() }.into(imageView)
+            ageTextView.text = personDetail.age.toString() +" Years"
+            countryTextView.text = personDetail.country
+            jobTextView2.text = personDetail.profession
+            emailTextView.text = personDetail.email
+            heightTextView.text = personDetail.height.toString() +"cm"
+            genderTextView.text = personDetail.gender
+            colorTextView2.text = personDetail.favorite.color
+            foodTextView.text = personDetail.favorite.food
+            songIB.setOnClickListener{
+                //todo lanzar un ModalDialog para mostrar el string
+            }
+
+        }
+
     }
     private fun cleanView(){
-        binding.personID.text = ""
+        with(binding){
+            nameTextView.text = ""
+        }
+
     }
 
 
