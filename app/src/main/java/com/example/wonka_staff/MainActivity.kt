@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.wonka_staff.databinding.ActivityMainBinding
 import com.example.wonka_staff.models.Result
-import com.example.wonka_staff.models.testModel
 import com.example.wonka_staff.repository.WillyWonkaAPI
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory

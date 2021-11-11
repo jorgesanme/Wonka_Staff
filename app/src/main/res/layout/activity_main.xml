@@ -20,13 +20,13 @@
         android:id="@+id/staffRV"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="#8FCFE8EB"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_bar"
-        tools:listitem="@layout/staff_item"
         tools:itemCount="5"
-        />
+        tools:listitem="@layout/staff_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
