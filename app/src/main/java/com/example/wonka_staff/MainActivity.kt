@@ -16,25 +16,46 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 class MainActivity : AppCompatActivity() {
-
+    var page: Int = 1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater).also { binding ->
             setContentView(binding.root)
         }
 
-        val jobList = CoroutineScope(Dispatchers.IO).launch {
-            val staffList: List<Result> = downloadStaffList()
-            withContext(Dispatchers.Main){
-                val adapter = StaffRecycleAdapter()
-                binding.staffRV.adapter = adapter
-                adapter.staffList = staffList
+        binding.btNextPage.setOnClickListener {
+            if (page <= 20) {
+                page++
+                binding.page.text = page.toString()
+            }
+        }
+        binding.btPreviusPage.setOnClickListener{
+            if (page>=1){
+                page--
+                binding.page.text = page.toString()
+
             }
         }
 
+            CoroutineScope(Dispatchers.IO).launch() {
+                val staffList: MutableList<Result> = downloadStaffList(page) as MutableList<Result>
+                var filterList: MutableList<Result> = mutableListOf()
+                withContext(Dispatchers.Main) {
+                    val adapter = StaffRecycleAdapter()
+                    binding.staffRV.adapter = adapter
+                    adapter.staffList = staffList
+                    adapter.notifyDataSetChanged()
+                    filterList = staffList.filter { it.gender.equals('F') } as MutableList<Result>
+                    print(filterList)
+                }
+            }
+        }
+
+
     }
 
-    private suspend fun downloadStaffList(): List<Result> {
+
+    private suspend fun downloadStaffList(page: Int): List<Result> {
         return withContext(Dispatchers.IO) {
             val client = OkHttpClient().newBuilder().build()
             val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
@@ -45,9 +66,9 @@ class MainActivity : AppCompatActivity() {
                 .build()
 
             val api: WillyWonkaAPI = retrofit.create(WillyWonkaAPI::class.java)
-            val response = api.getStaffList()
+            val response = api.getStaffList("?page=$page")
+//            response!!.results.filter { it.gender.equals("M") }
             response!!.results
         }
     }
 
-}
