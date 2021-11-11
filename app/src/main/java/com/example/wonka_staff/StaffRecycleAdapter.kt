@@ -6,8 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wonka_staff.databinding.StaffItemBinding
-import com.example.wonka_staff.models.StaffModel
-import com.example.wonka_staff.models.testModel
+import com.example.wonka_staff.models.Result
 import kotlinx.coroutines.*
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -15,7 +14,7 @@ import okhttp3.Request
 class StaffRecycleAdapter : RecyclerView.Adapter<StaffViewHolder>() {
 
     //todo cambiar list por MVVM->list
-    var staffList: List<testModel> = emptyList()
+    var staffList: List<Result> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StaffViewHolder =
         StaffItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -33,9 +32,9 @@ class StaffRecycleAdapter : RecyclerView.Adapter<StaffViewHolder>() {
 }
 
 data class StaffViewHolder(val binding: StaffItemBinding) : RecyclerView.ViewHolder(binding.root){
-    fun bind(person: testModel){
-        binding.fistName.text  = person.firstName
-        binding.lastName.text = person.lastName
+    fun bind(person: Result){
+        binding.fistName.text  = person.first_name
+        binding.lastName.text = person.last_name
         binding.gender.text = person.gender
 
         val job = CoroutineScope(Dispatchers.Main).launch {
