@@ -39,6 +39,7 @@ data class StaffViewHolder(val binding: StaffItemBinding) : RecyclerView.ViewHol
             lastName.text = person.last_name
             gender.text = person.gender
             job.text = person.profession
+            id.text = person.id.toString()
             avatarView.setImageBitmap(null)
 
             val job = CoroutineScope(Dispatchers.Main).launch {
