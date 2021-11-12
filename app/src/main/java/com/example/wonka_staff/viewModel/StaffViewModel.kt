@@ -32,10 +32,24 @@ class StaffViewModel : ViewModel() {
 
             val api: WillyWonkaAPI = retrofit.create(WillyWonkaAPI::class.java)
             val response = api.getStaffList("?page=$page")
-            /** posible forma de filtrar
-            // response!!.results.filter { it.gender.equals("M") }
-             */
             state.postValue(StaffState(response!!.results))
+        }
+    }
+    fun getGenderFilterStaffList(page: Int, gender: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            var filterList: MutableList<Result> = mutableListOf()
+            val client = OkHttpClient().newBuilder().build()
+            val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+            val retrofit = Retrofit.Builder()
+                .baseUrl("https://2q2woep105.execute-api.eu-west-1.amazonaws.com/napptilus/oompa-loompas/")
+                .client(client)
+                .addConverterFactory(MoshiConverterFactory.create(moshi))
+                .build()
+
+            val api: WillyWonkaAPI = retrofit.create(WillyWonkaAPI::class.java)
+            val response = api.getStaffList("?page=$page")
+            filterList = response!!.results.filter { it.gender.contains(gender) } as MutableList<Result>
+            state.postValue(StaffState(filterList)) //response!!.results
         }
     }
 

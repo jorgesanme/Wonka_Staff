@@ -56,6 +56,15 @@ class MainActivity : AppCompatActivity() {
             }
             viewModel.getStaffList(page)
         }
+        binding.btFemale.setOnClickListener {
+            viewModel.getGenderFilterStaffList(page,"F")
+        }
+        binding.btMale.setOnClickListener {
+            viewModel.getGenderFilterStaffList(page,"M")
+        }
+        binding.btAllGende.setOnClickListener {
+            viewModel.getStaffList(page)
+        }
 
 
         viewModel.state.observe(this){ state ->
