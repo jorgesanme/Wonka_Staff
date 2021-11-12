@@ -1,11 +1,16 @@
 package com.example.wonka_staff.models
 
-
-typealias StaffModel = ArrayList<StaffModelElement>
+typealias  StaffList = List<StaffModelElement>
 
 data class StaffModelElement (
-    val firstName: String,
-    val lastName: String,
+    val current: Long,
+    val total: Long,
+    val results: List<Result>
+)
+
+data class Result (
+    val first_name: String,
+    val last_name: String,
     val favorite: Favorite,
     val gender: String,
     val image: String,
@@ -20,6 +25,8 @@ data class StaffModelElement (
 data class Favorite (
     val color: String,
     val food: String,
-    val randomString: String,
+    val random_string: String,
     val song: String
 )
+
+
