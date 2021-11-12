@@ -6,10 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/topLinearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="411dp"
+        android:layout_height="47dp"
         android:layout_marginBottom="4dp"
         android:gravity="center"
         android:orientation="horizontal"
@@ -18,9 +18,28 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
-            android:id="@+id/btPreviusPage"
-            android:layout_width="match_parent"
+            android:id="@+id/btNextPage"
+            android:layout_width="32dp"
             android:layout_height="32dp"
+            android:layout_marginStart="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/btPreviusPage"
+            app:layout_constraintStart_toEndOf="@+id/page"
+            app:layout_constraintTop_toTopOf="@+id/btPreviusPage"
+            app:layout_constraintVertical_bias="0.466"
+            app:srcCompat="@android:drawable/ic_media_next"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <ImageButton
+            android:id="@+id/btPreviusPage"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.466"
             app:srcCompat="@android:drawable/ic_media_previous"
             tools:ignore="SpeakableTextPresentCheck" />
 
@@ -28,21 +47,50 @@
             android:id="@+id/page"
             android:layout_width="wrap_content"
             android:layout_height="32dp"
+            android:layout_marginStart="4dp"
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:inputType="number"
             android:text="1"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btPreviusPage"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.466"
+            tools:ignore="TouchTargetSizeCheck" />
 
-        <ImageButton
-            android:id="@+id/btNextPage"
+        <Switch
+            android:id="@+id/genderSwitch"
             android:layout_width="wrap_content"
-            android:layout_height="32dp"
-            app:srcCompat="@android:drawable/ic_media_next"
-            tools:ignore="SpeakableTextPresentCheck" />
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:text="Gender F/M"
+            app:layout_constraintBottom_toBottomOf="@+id/btNextPage"
+            app:layout_constraintStart_toEndOf="@+id/btNextPage"
+            app:layout_constraintTop_toTopOf="@+id/btNextPage" />
 
-    </LinearLayout>
+        <SearchView
+            android:id="@+id/searchBar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/genderSwitch"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="btPreviusPage,page,btNextPage" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/staffRV"
