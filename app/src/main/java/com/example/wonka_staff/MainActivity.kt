@@ -24,13 +24,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.btNextPage.setOnClickListener {
-            if (page <= 20) {
+            if (page < 20) {
                 page++
                 binding.page.text = page.toString()
             }
         }
         binding.btPreviusPage.setOnClickListener{
-            if (page>=1){
+            if (page > 1){
                 page--
                 binding.page.text = page.toString()
 
