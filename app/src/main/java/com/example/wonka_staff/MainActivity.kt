@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.util.Util
+import com.example.wonka_staff.Utils.Utils
 import com.example.wonka_staff.databinding.ActivityMainBinding
 import com.example.wonka_staff.models.Result
 import com.example.wonka_staff.repository.WillyWonkaAPI
@@ -29,6 +31,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater).also { binding ->
             setContentView(binding.root)
         }
+        val viewModel = ViewModelProvider(this).get(StaffViewModel::class.java)
+        val adapter = StaffRecycleAdapter()
+        viewModel.getStaffList(page)
 
         binding.btNextPage.setOnClickListener {
             if (page < 20) {
@@ -36,8 +41,10 @@ class MainActivity : AppCompatActivity() {
                 binding.page.text = page.toString()
             }else{
                 Toast.makeText(binding.root.context,"Last page: ${page.toString()}", Toast.LENGTH_LONG).show()
+                Utils.showAlert("Pay Atention", "You have arrive to the last page", binding.root.context)
 
             }
+            viewModel.getStaffList(page)
         }
         binding.btPreviusPage.setOnClickListener {
             if (page > 1) {
@@ -45,12 +52,12 @@ class MainActivity : AppCompatActivity() {
                 binding.page.text = page.toString()
             }else{
                 Toast.makeText(binding.root.context,"First page: ${page.toString()}", Toast.LENGTH_LONG).show()
+                Utils.showAlert("Pay Atention", "There is no more previous page", binding.root.context)
             }
+            viewModel.getStaffList(page)
         }
 
-        val viewModel = ViewModelProvider(this).get(StaffViewModel::class.java)
-        val adapter = StaffRecycleAdapter()
-        viewModel.getStaffList(page)
+
         viewModel.state.observe(this){ state ->
             adapter.staffList = state.staffList as MutableList<Result>
         }
