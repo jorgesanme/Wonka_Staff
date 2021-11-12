@@ -73,6 +73,7 @@ class DetailPerson() : AppCompatActivity() {
 
     }
 
+
     fun showAlert(title: String, message: String, contex: Context?) {
         val builder = AlertDialog.Builder(contex!!)
         builder.setTitle(title)
@@ -81,6 +82,7 @@ class DetailPerson() : AppCompatActivity() {
         val dialog: AlertDialog = builder.create()
         dialog.show()
     }
+
 
 }
 
