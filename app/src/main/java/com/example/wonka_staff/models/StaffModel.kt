@@ -1,6 +1,5 @@
 package com.example.wonka_staff.models
 
-typealias  StaffList = List<StaffModelElement>
 
 data class StaffModelElement (
     val current: Long,

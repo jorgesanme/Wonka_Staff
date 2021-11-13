@@ -2,14 +2,16 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootViewRV"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#65DBF0F3"
     tools:context=".MainActivity">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/topLinearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="411dp"
+        android:layout_height="47dp"
         android:layout_marginBottom="4dp"
         android:gravity="center"
         android:orientation="horizontal"
@@ -18,42 +20,129 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
-            android:id="@+id/btPreviusPage"
-            android:layout_width="match_parent"
+            android:id="@+id/btNextPage"
+            android:layout_width="32dp"
             android:layout_height="32dp"
+            android:layout_marginStart="4dp"
+            android:background="#65DBF0F3"
+            app:layout_constraintBottom_toBottomOf="@+id/btPreviusPage"
+            app:layout_constraintStart_toEndOf="@+id/page"
+            app:layout_constraintTop_toTopOf="@+id/btPreviusPage"
+            app:layout_constraintVertical_bias="0.466"
+            app:srcCompat="@android:drawable/ic_media_next"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+        <ImageButton
+            android:id="@+id/btPreviusPage"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:background="#65DBF0F3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.466"
             app:srcCompat="@android:drawable/ic_media_previous"
-            tools:ignore="SpeakableTextPresentCheck" />
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         <TextView
             android:id="@+id/page"
             android:layout_width="wrap_content"
             android:layout_height="32dp"
+            android:layout_marginStart="4dp"
             android:layout_weight="1"
+            android:background="#FDFCFC"
             android:gravity="center_vertical"
             android:inputType="number"
             android:text="1"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btPreviusPage"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.466"
+            tools:ignore="TouchTargetSizeCheck" />
+
 
         <ImageButton
-            android:id="@+id/btNextPage"
-            android:layout_width="wrap_content"
+            android:id="@+id/btFemale"
+            android:layout_width="32dp"
             android:layout_height="32dp"
-            app:srcCompat="@android:drawable/ic_media_next"
-            tools:ignore="SpeakableTextPresentCheck" />
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:background="#65DBF0F3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btNextPage"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.428"
+            app:srcCompat="@drawable/ic_female_black_24dp"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
-    </LinearLayout>
+        <ImageButton
+            android:id="@+id/btMale"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:background="#65DBF0F3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btFemale"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.428"
+            app:srcCompat="@drawable/ic_male_black_24dp"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+        <ImageButton
+            android:id="@+id/btAllGende"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:background="#65DBF0F3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btMale"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.428"
+            app:srcCompat="@drawable/ic_wc_black_24dp"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+        <SearchView
+            android:id="@+id/searchBar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="4dp"
+            android:background="#65DBF0F3"
+            android:queryHint="Profession"
+            app:layout_constraintBottom_toBottomOf="@+id/btAllGende"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btAllGende"
+            app:layout_constraintTop_toTopOf="@+id/btAllGende" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="btPreviusPage,page,btNextPage" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/staffRV"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#65DBF0F3"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topLinearLayout"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topLinearLayout"
         tools:itemCount="5"
         tools:listitem="@layout/staff_item">
 

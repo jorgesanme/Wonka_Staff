@@ -11,6 +11,10 @@ class StaffRecycleAdapter : RecyclerView.Adapter<StaffViewHolder>() {
 
 
     var staffList: MutableList<Result> = mutableListOf()
+    set(value) {
+        field = value
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StaffViewHolder =
         StaffItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
