@@ -2,6 +2,7 @@ package com.example.wonka_staff
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.lifecycle.ViewModel
@@ -53,14 +54,9 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                 page++
                 binding.page.text = page.toString()
             } else {
-                Toast.makeText(
-                    binding.root.context,
-                    "Last page: ${page.toString()}",
-                    Toast.LENGTH_LONG
-                ).show()
                 Utils.showAlert(
                     "Pay Atention",
-                    "You have arrive to the last page",
+                    "You have arrived to the last page",
                     binding.root.context
                 )
 
@@ -72,11 +68,6 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                 page--
                 binding.page.text = page.toString()
             } else {
-                Toast.makeText(
-                    binding.root.context,
-                    "First page: ${page.toString()}",
-                    Toast.LENGTH_LONG
-                ).show()
                 Utils.showAlert(
                     "Pay Atention",
                     "There is no more previous page",
@@ -85,6 +76,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
             }
             viewModel.getStaffList(page)
         }
+
         /** Gender Selector**/
         binding.btFemale.setOnClickListener {
             gender = genders.Female.letter
@@ -116,11 +108,16 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         binding.staffRV.adapter = adapter
 
     }
+    private fun hideKeyboard(){
+        val imm= getSystemService(INPUT_METHOD_SERVICE)as InputMethodManager
+        imm.hideSoftInputFromWindow(binding.rootViewRV.windowToken, 0)
+    }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
         if (!query.isNullOrEmpty()) {
             viewModel.getProfessionFilterStaffList(page, gender, query)
         }
+        hideKeyboard()
         return true
     }
 

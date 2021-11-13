@@ -1,8 +1,10 @@
 package com.example.wonka_staff.viewModel
 
+import android.provider.CalendarContract
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.wonka_staff.MainActivity
 import com.example.wonka_staff.genders
 import com.example.wonka_staff.models.PersonModel
 import com.example.wonka_staff.models.Result
@@ -64,6 +66,7 @@ class StaffViewModel : ViewModel() {
                     it.profession.contains(query!!)
                             && it.gender.contentEquals(gender)  } as MutableList<Result>
             }
+
 
             state.postValue(StaffState(filterList))
         }
