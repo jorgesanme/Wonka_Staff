@@ -3,6 +3,7 @@ package com.example.wonka_staff.viewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.wonka_staff.genders
 import com.example.wonka_staff.models.PersonModel
 import com.example.wonka_staff.models.Result
 import com.example.wonka_staff.repository.WillyWonkaAPI
@@ -35,7 +36,8 @@ class StaffViewModel : ViewModel() {
             state.postValue(StaffState(response!!.results))
         }
     }
-    fun getGenderFilterStaffList(page: Int, gender: String) {
+//
+    fun getProfessionFilterStaffList(page: Int, gender: String, query: String?) {
         viewModelScope.launch(Dispatchers.IO) {
             var filterList: MutableList<Result> = mutableListOf()
             val client = OkHttpClient().newBuilder().build()
@@ -48,8 +50,22 @@ class StaffViewModel : ViewModel() {
 
             val api: WillyWonkaAPI = retrofit.create(WillyWonkaAPI::class.java)
             val response = api.getStaffList("?page=$page")
-            filterList = response!!.results.filter { it.gender.contains(gender) } as MutableList<Result>
-            state.postValue(StaffState(filterList)) //response!!.results
+
+            if(gender == genders.Both.letter){
+                if (query == null){
+                    filterList = response!!.results as MutableList<Result>
+                }else{
+                    filterList = response!!.results.filter {
+                        it.profession.contains(query!!) } as MutableList<Result>
+                }
+
+            }else{
+                filterList = response!!.results.filter {
+                    it.profession.contains(query!!)
+                            && it.gender.contentEquals(gender)  } as MutableList<Result>
+            }
+
+            state.postValue(StaffState(filterList))
         }
     }
 
@@ -67,6 +83,7 @@ class StaffViewModel : ViewModel() {
                 person.postValue(response)
             }
         }
+
     }
 
 
