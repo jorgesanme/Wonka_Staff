@@ -1,9 +1,9 @@
 # Wonka Staff 
  
 ## Descripción
-Prueba técnica realizada para una empresa [Test.pdf](https://github.com/jorgesanme/Wonka_Staff/blob/main/images/Napptillus_Android%20Developer.pdf)
+Prueba técnica realizada durante un proceso de selección [Test.pdf](https://github.com/jorgesanme/Wonka_Staff/blob/main/images/Napptillus_Android%20Developer.pdf)
 
-Wonka Staff es una app que consume los datos desde la API  [Willy Wonka Factory](https://2q2woep105.execute-api.eu-west-1.amazonaws.com/napptilus/oompa-loompas). Donde se disponen de 20 paginas de datos. Cada pagina dispone de los datos de 25 trabajadores identificados con un id unico.
+Wonka Staff es una app que consume los datos desde la API  [Willy Wonka's Factory](https://2q2woep105.execute-api.eu-west-1.amazonaws.com/napptilus/oompa-loompas). Donde se disponen de 20 paginas de datos en formato Json. Cada pagina dispone de los datos de 25 trabajadores identificados con un [id](https://2q2woep105.execute-api.eu-west-1.amazonaws.com/napptilus/oompa-loompas/1)
 
 
 ## Explicación de la app:
@@ -18,9 +18,9 @@ Para ello se ha usado:
 
 - **Okhttp3**  => inicio de las llamadas a red
 - **Retrofit**  => llamadas a red para descargar datos más simplificadas
-- **Binding** => para vincular las view
+- **Binding** => para vincular las views
 - **Glide**  => carga las imagenes desde http
-- **Coroutines** => Trabajar en Async para no bloquear el hilo main de la UI.
+- **Coroutines** => Trabajar en Async en background para no bloquear el hilo main de la UI.
 - **Moshi** => parceador de archivos JSon a modelos de red.
 - **Lifecycle** => Crea más facilmente el viewModel  
 
