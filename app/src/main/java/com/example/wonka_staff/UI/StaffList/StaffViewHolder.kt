@@ -14,8 +14,8 @@ import kotlinx.coroutines.withContext
 data class StaffViewHolder(val binding: StaffItemBinding) : RecyclerView.ViewHolder(binding.root) {
     fun bind(person: Result) {
         with(binding) {
-            fistName.text = person.first_name
-            lastName.text = person.last_name
+            fistName.text = person.firstName
+            lastName.text = person.lastName
             gender.text = person.gender
             job.text = person.profession
             id.text = person.id.toString()

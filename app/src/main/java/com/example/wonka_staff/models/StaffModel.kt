@@ -1,5 +1,7 @@
 package com.example.wonka_staff.models
 
+import com.squareup.moshi.Json
+
 
 data class StaffModelElement (
     val current: Long,
@@ -8,8 +10,8 @@ data class StaffModelElement (
 )
 
 data class Result (
-    val first_name: String,
-    val last_name: String,
+    @Json(name ="first_name")val firstName: String,
+    @Json(name ="last_name")val lastName: String,
     val favorite: Favorite,
     val gender: String,
     val image: String,

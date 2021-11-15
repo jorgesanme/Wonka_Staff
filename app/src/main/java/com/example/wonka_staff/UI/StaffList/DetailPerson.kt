@@ -47,8 +47,8 @@ class DetailPerson() : AppCompatActivity() {
 
     private fun initView(personDetail: PersonModel) {
         with(binding) {
-            nameTextView.text = personDetail.first_name
-            surnameTextView.text = personDetail.last_name
+            nameTextView.text = personDetail.firstName
+            surnameTextView.text = personDetail.lastName
             Glide.with(root).load(personDetail.image).also { it.circleCrop() }.into(imageView)
             ageTextView.text = personDetail.age.toString() + " Years"
             countryTextView.text = personDetail.country
