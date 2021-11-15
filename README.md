@@ -16,13 +16,13 @@ El usuario dispone de un selector de paginas para navegar por cada una de ellas,
 
 Para ello se ha usado:
 
-- **Okhttp3**  => inicio de las llamadas a red
-- **Retrofit**  => llamadas a red para descargar datos más simplificadas
-- **Binding** => para vincular las views
-- **Glide**  => carga las imagenes desde http
-- **Coroutines** => Trabajar en Async en background para no bloquear el hilo main de la UI.
-- **Moshi** => parceador de archivos JSon a modelos de red.
-- **Lifecycle** => Crea más facilmente el viewModel  
+- **Okhttp3**  => Punto de inicio de las llamadas a red.
+- **Retrofit**  => Llamadas a red para descargar datos más simplificadas. La construción de la url de llamadas es + simple
+- **Binding** => Eliminar código repetitivo en la vinculación de código con las views del xml.
+- **Glide**  => Evitar parcear un stream de datos a Bitmap en la descarga de las imagenes desde http. Tiene Cache de imagen y aporta funciona para convertir a Imagen circular. 
+- **Coroutines** => Trabajar en Async en background para no bloquear el hilo main de la UI y evitar dependencia de RxJava.
+- **Moshi** => Parceador de archivos JSon al modelo de datos. Modificar los nombres de variables que nos llegan desde modelo de red.
+- **Lifecycle** => Crea más facilmente el viewModel y con ella desacoplar la lógica de la vista. Flujo de información en una sola dirección.   
 
 
 ## Imagenes de muestra
