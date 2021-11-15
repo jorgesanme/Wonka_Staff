@@ -26,7 +26,7 @@ Para ello se ha usado:
 
 
 ## Imagenes de muestra
-### Paginador   | Filtrar por genero |  Filtrar por profesion  | Detalles del trabajador|
+### Paginador   | Filtrar x genero |  Filtrar x profesión  | Detalles del trabajador|
 <img src="https://github.com/jorgesanme/Wonka_Staff/blob/main/images/Wonka_Staff_1.gif" width="160" height="300" />|
 <img src="https://github.com/jorgesanme/Wonka_Staff/blob/main/images/Wonka_Staff_2.gif" width="160" height="300" />|
 <img src="https://github.com/jorgesanme/Wonka_Staff/blob/main/images/Wonka_Staff_3.gif" width="160" height="300" />|
