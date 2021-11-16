@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     var listToShow: MutableList<Result> = mutableListOf()
     private lateinit var binding: ActivityMainBinding
     var gender: String = genders.Both.letter
+    var query: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,7 +62,8 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                 )
 
             }
-            viewModel.getStaffList(page)
+//            viewModel.getStaffList(page)
+            viewModel.getProfessionFilterStaffList(page, gender, query)
         }
         binding.btPreviusPage.setOnClickListener {
             if (page > 1) {
@@ -74,22 +76,25 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                     binding.root.context
                 )
             }
-            viewModel.getStaffList(page)
+//            viewModel.getStaffList(page)
+            viewModel.getProfessionFilterStaffList(page, gender, query)
         }
 
         /** Gender Selector**/
         binding.btFemale.setOnClickListener {
             gender = genders.Female.letter
-            viewModel.getStaffList(page)
+//            viewModel.getStaffList(page)
+            viewModel.getProfessionFilterStaffList(page, gender, query )
         }
         binding.btMale.setOnClickListener {
             gender = genders.Male.letter
-            viewModel.getStaffList(page)
+//            viewModel.getStaffList(page)
+            viewModel.getProfessionFilterStaffList(page, gender, query )
         }
         binding.btAllGende.setOnClickListener {
             gender = genders.Both.letter
 //            viewModel.getStaffList(page)
-            viewModel.getProfessionFilterStaffList(page, gender, query = null)
+            viewModel.getProfessionFilterStaffList(page, gender, query )
         }
         /** search*/
         binding.searchBar.setOnQueryTextListener(this)
@@ -114,6 +119,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
+        this.query = query
         if (!query.isNullOrEmpty()) {
             viewModel.getProfessionFilterStaffList(page, gender, query)
         }
@@ -122,6 +128,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     }
 
     override fun onQueryTextChange(query: String?): Boolean {
+        this.query = query
         if (!query.isNullOrEmpty()) {
             viewModel.getProfessionFilterStaffList(page, gender, query)
         }
