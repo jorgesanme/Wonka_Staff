@@ -4,41 +4,27 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import android.widget.SearchView
-import android.widget.Toast
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.bumptech.glide.util.Util
 import com.example.wonka_staff.Utils.Utils
 import com.example.wonka_staff.databinding.ActivityMainBinding
 import com.example.wonka_staff.models.Result
-import com.example.wonka_staff.repository.WillyWonkaAPI
 import com.example.wonka_staff.viewModel.StaffViewModel
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import okhttp3.OkHttpClient
-import okhttp3.internal.notifyAll
-import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
-import java.time.Duration
 
 enum class genders(val letter: String) {
     Female("F"),
     Male("M"),
     Both("")
-
 }
 
 class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
-    var page: Int = 1
-    lateinit var viewModel: StaffViewModel
-    var listToShow: MutableList<Result> = mutableListOf()
+
+
     private lateinit var binding: ActivityMainBinding
+    lateinit var viewModel: StaffViewModel
+    var page: Int = 1
     var gender: String = genders.Both.letter
     var query: String? = ""
+    val adapter = StaffRecycleAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,8 +32,8 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
             setContentView(binding.root)
         }
         viewModel = ViewModelProvider(this).get(StaffViewModel::class.java)
-        val adapter = StaffRecycleAdapter()
-        viewModel.getProfessionFilterStaffList(page, gender, query)
+
+        viewModel.getStaffList(page, gender, query)
 
         /** Page Selector**/
         binding.btNextPage.setOnClickListener {
@@ -58,10 +44,10 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                 Utils.showAlert(
                     "Pay Atention",
                     "You have arrived to the last page",
-                    binding.root.context
+                    this
                 )
             }
-            viewModel.getProfessionFilterStaffList(page, gender, query)
+            viewModel.getStaffList(page, gender, query)
         }
         binding.btPreviusPage.setOnClickListener {
             if (page > 1) {
@@ -71,26 +57,26 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                 Utils.showAlert(
                     "Pay Atention",
                     "There is no more previous page",
-                    binding.root.context
+                    this
                 )
             }
-            viewModel.getProfessionFilterStaffList(page, gender, query)
+            viewModel.getStaffList(page, gender, query)
         }
 
         /** Gender Selector**/
         binding.btFemale.setOnClickListener {
             gender = genders.Female.letter
-            viewModel.getProfessionFilterStaffList(page, gender, query )
+            viewModel.getStaffList(page, gender, query )
         }
 
         binding.btMale.setOnClickListener {
             gender = genders.Male.letter
-            viewModel.getProfessionFilterStaffList(page, gender, query )
+            viewModel.getStaffList(page, gender, query )
         }
 
         binding.btAllGende.setOnClickListener {
             gender = genders.Both.letter
-            viewModel.getProfessionFilterStaffList(page, gender, query )
+            viewModel.getStaffList(page, gender, query )
         }
 
         /** search*/
@@ -116,7 +102,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     override fun onQueryTextSubmit(query: String?): Boolean {
         this.query = query
         if (!query.isNullOrEmpty()) {
-            viewModel.getProfessionFilterStaffList(page, gender, query)
+            viewModel.getStaffList(page, gender, query)
         }
         hideKeyboard()
         return true
@@ -125,7 +111,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     override fun onQueryTextChange(query: String?): Boolean {
         this.query = query
         if (!query.isNullOrEmpty()) {
-            viewModel.getProfessionFilterStaffList(page, gender, query)
+            viewModel.getStaffList(page, gender, query)
         }
         return true
     }
