@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         }
         viewModel = ViewModelProvider(this).get(StaffViewModel::class.java)
         val adapter = StaffRecycleAdapter()
-        viewModel.getStaffList(page)
+        viewModel.getProfessionFilterStaffList(page, gender, query)
 
         /** Page Selector**/
         binding.btNextPage.setOnClickListener {
@@ -60,9 +60,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                     "You have arrived to the last page",
                     binding.root.context
                 )
-
             }
-//            viewModel.getStaffList(page)
             viewModel.getProfessionFilterStaffList(page, gender, query)
         }
         binding.btPreviusPage.setOnClickListener {
@@ -76,29 +74,29 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                     binding.root.context
                 )
             }
-//            viewModel.getStaffList(page)
             viewModel.getProfessionFilterStaffList(page, gender, query)
         }
 
         /** Gender Selector**/
         binding.btFemale.setOnClickListener {
             gender = genders.Female.letter
-//            viewModel.getStaffList(page)
             viewModel.getProfessionFilterStaffList(page, gender, query )
         }
+
         binding.btMale.setOnClickListener {
             gender = genders.Male.letter
-//            viewModel.getStaffList(page)
             viewModel.getProfessionFilterStaffList(page, gender, query )
         }
+
         binding.btAllGende.setOnClickListener {
             gender = genders.Both.letter
-//            viewModel.getStaffList(page)
             viewModel.getProfessionFilterStaffList(page, gender, query )
         }
+
         /** search*/
         binding.searchBar.setOnQueryTextListener(this)
 
+        /** Filter by gender*/
         viewModel.state.observe(this) { state ->
             when (gender) {
                 genders.Female.letter -> adapter.staffList =
@@ -107,11 +105,8 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                     state.staffList.filter { it.gender.equals(gender) } as MutableList<Result>
                 genders.Both.letter -> adapter.staffList = state.staffList as MutableList<Result>
             }
-
         }
-
         binding.staffRV.adapter = adapter
-
     }
     private fun hideKeyboard(){
         val imm= getSystemService(INPUT_METHOD_SERVICE)as InputMethodManager

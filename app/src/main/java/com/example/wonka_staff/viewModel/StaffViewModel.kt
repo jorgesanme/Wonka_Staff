@@ -23,22 +23,6 @@ class StaffViewModel : ViewModel() {
     val state: MutableLiveData<StaffState> = MutableLiveData()
     val person: MutableLiveData<PersonModel> = MutableLiveData()
 
-    fun getStaffList(page: Int) {
-        viewModelScope.launch(Dispatchers.IO) {
-            val client = OkHttpClient().newBuilder().build()
-            val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
-            val retrofit = Retrofit.Builder()
-                .baseUrl("https://2q2woep105.execute-api.eu-west-1.amazonaws.com/napptilus/oompa-loompas/")
-                .client(client)
-                .addConverterFactory(MoshiConverterFactory.create(moshi))
-                .build()
-
-            val api: WillyWonkaAPI = retrofit.create(WillyWonkaAPI::class.java)
-            val response = api.getStaffList("?page=$page")
-            state.postValue(StaffState(response!!.results))
-        }
-    }
-//
     fun getProfessionFilterStaffList(page: Int, gender: String, query: String?) {
         viewModelScope.launch(Dispatchers.IO) {
             var filterList: MutableList<Result> = mutableListOf()
@@ -66,7 +50,6 @@ class StaffViewModel : ViewModel() {
                     it.profession.contains(query!!)
                             && it.gender.contentEquals(gender)  } as MutableList<Result>
             }
-
 
             state.postValue(StaffState(filterList))
         }
