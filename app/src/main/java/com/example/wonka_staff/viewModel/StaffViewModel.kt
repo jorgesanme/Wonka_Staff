@@ -1,10 +1,9 @@
 package com.example.wonka_staff.viewModel
 
-import android.provider.CalendarContract
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.wonka_staff.MainActivity
 import com.example.wonka_staff.genders
 import com.example.wonka_staff.models.PersonModel
 import com.example.wonka_staff.models.Result
@@ -13,14 +12,15 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 class StaffViewModel : ViewModel() {
 
-    val state: MutableLiveData<StaffState> = MutableLiveData()
+    val stateMLD: MutableLiveData<StaffState> = MutableLiveData()
+    val state: LiveData<StaffState>
+        get() = stateMLD
     val person: MutableLiveData<PersonModel> = MutableLiveData()
     var filterList: MutableList<Result> = mutableListOf()
 
@@ -51,7 +51,7 @@ class StaffViewModel : ViewModel() {
                             && it.gender.contentEquals(gender)
                 } as MutableList<Result>
             }
-            state.postValue(StaffState(filterList))
+            stateMLD.postValue(StaffState(filterList))
         }
     }
 

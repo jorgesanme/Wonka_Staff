@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
             viewModel.getStaffList(page, gender, query )
         }
 
-        /** search*/
+        /** SearchView*/
         binding.searchBar.setOnQueryTextListener(this)
 
         /** Filter by gender*/
@@ -94,6 +94,8 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         }
         binding.staffRV.adapter = adapter
     }
+
+    /** SearchView members*/
     private fun hideKeyboard(){
         val imm= getSystemService(INPUT_METHOD_SERVICE)as InputMethodManager
         imm.hideSoftInputFromWindow(binding.rootViewRV.windowToken, 0)
