@@ -17,7 +17,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-class StaffViewModel(val retrofit: Retrofit) : ViewModel() {
+class StaffViewModel(val api: WillyWonkaAPI) : ViewModel() {
 
     /** DataList*/
     val stateMLD: MutableLiveData<StaffState> = MutableLiveData()
@@ -30,12 +30,7 @@ class StaffViewModel(val retrofit: Retrofit) : ViewModel() {
     val person: LiveData<PersonModel>
         get() = personMLD
 
-    private val api: WillyWonkaAPI
     private var requestJob: Job? = null
-
-    init {
-        api = retrofit.create(WillyWonkaAPI::class.java)
-    }
 
 
     fun getStaffList(page: Int, gender: String, query: String?) {

@@ -1,6 +1,7 @@
 package com.example.wonka_staff.DI
 
 import android.util.Log
+import com.example.wonka_staff.repository.WillyWonkaAPI
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
@@ -36,6 +37,9 @@ object NetworkDIModule: DIBaseModule("NetworkDIModule") {
                 .client(instance())
                 .addConverterFactory(MoshiConverterFactory.create(instance()))
                 .build()
+        }
+        bind<WillyWonkaAPI>() with  singleton {
+            instance<Retrofit>().create(WillyWonkaAPI::class.java)
         }
     }
 }
