@@ -19,11 +19,21 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
+import org.kodein.di.DI
+import org.kodein.di.DIAware
+import org.kodein.di.android.di
+import org.kodein.di.direct
+import org.kodein.di.instance
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-class DetailPerson() : AppCompatActivity() {
+class DetailPerson() : AppCompatActivity(), DIAware {
+
+    override val di: DI by di()
     lateinit var binding: ActivityDetailPersonBinding
+    private val viewModel: StaffViewModel by lazy {
+        ViewModelProvider(this, direct.instance()).get(StaffViewModel::class.java)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailPersonBinding.inflate(layoutInflater).also { binding ->
@@ -31,13 +41,11 @@ class DetailPerson() : AppCompatActivity() {
 
         }
         val incomingID = intent.getStringExtra("personId").toString()
-        val viewModel = ViewModelProvider(this).get(StaffViewModel::class.java)
 
         viewModel.getPersonDetail(incomingID)
         viewModel.person.observe(this) { person ->
             initView(person)
         }
-
 
         binding.backButton.setOnClickListener {
             finish()
