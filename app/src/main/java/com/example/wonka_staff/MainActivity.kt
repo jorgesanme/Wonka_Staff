@@ -3,6 +3,7 @@ package com.example.wonka_staff
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
+import android.widget.Button
 import android.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import com.example.wonka_staff.DI.NetworkDIModule
@@ -98,7 +99,27 @@ class MainActivity : AppCompatActivity(),
         }
 
         /** SearchView*/
-        binding.searchBar.setOnQueryTextListener(this)
+        with(binding){
+            searchBar.setOnQueryTextListener(this@MainActivity)
+            searchBar.setIconifiedByDefault(true);
+//            var botton = searchBar.findViewById<Button>(R.id.action_mode_close_button)
+//            botton.setOnClickListener{
+//
+//                query = ""
+//                viewModel.getStaffList(this@MainActivity.page,gender,query)
+//            }
+            searchBar.setOnCloseListener {
+                SearchView.OnCloseListener {
+                    query = ""
+                    viewModel.getStaffList(this@MainActivity.page,gender,query)
+                    false
+                }
+                false
+
+            }
+        }
+
+
 
         /** Filter by gender*/
         viewModel.state.observe(this) { state ->
@@ -130,8 +151,12 @@ class MainActivity : AppCompatActivity(),
 
     override fun onQueryTextChange(query: String?): Boolean {
         this.query = query
+
         if (!query.isNullOrEmpty()) {
             viewModel.getStaffList(page, gender, query)
+        }else{
+            viewModel.getStaffList(page, gender, query)
+            hideKeyboard()
         }
         return true
     }
