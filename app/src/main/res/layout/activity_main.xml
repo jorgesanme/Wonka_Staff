@@ -120,6 +120,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="4dp"
             android:background="#65DBF0F3"
+            android:imeOptions="actionSearch"
             android:queryHint="Profession"
             app:layout_constraintBottom_toBottomOf="@+id/btAllGende"
             app:layout_constraintEnd_toEndOf="parent"
