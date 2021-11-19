@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity(),
     SearchView.OnQueryTextListener {
 
     override val di: DI by di()
-    private val  viewModel: StaffViewModel by lazy {
+    private val viewModel: StaffViewModel by lazy {
         ViewModelProvider(this, direct.instance()).get(StaffViewModel::class.java)
     }
 
@@ -99,27 +99,7 @@ class MainActivity : AppCompatActivity(),
         }
 
         /** SearchView*/
-        with(binding){
-            searchBar.setOnQueryTextListener(this@MainActivity)
-            searchBar.setIconifiedByDefault(true);
-//            var botton = searchBar.findViewById<Button>(R.id.action_mode_close_button)
-//            botton.setOnClickListener{
-//
-//                query = ""
-//                viewModel.getStaffList(this@MainActivity.page,gender,query)
-//            }
-            searchBar.setOnCloseListener {
-                SearchView.OnCloseListener {
-                    query = ""
-                    viewModel.getStaffList(this@MainActivity.page,gender,query)
-                    false
-                }
-                false
-
-            }
-        }
-
-
+        binding.searchBar.setOnQueryTextListener(this)
 
         /** Filter by gender*/
         viewModel.state.observe(this) { state ->
@@ -154,7 +134,7 @@ class MainActivity : AppCompatActivity(),
 
         if (!query.isNullOrEmpty()) {
             viewModel.getStaffList(page, gender, query)
-        }else{
+        } else {
             viewModel.getStaffList(page, gender, query)
             hideKeyboard()
         }
