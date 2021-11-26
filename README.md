@@ -20,7 +20,7 @@ Para ello se ha usado:
 - **Retrofit**  => Llamadas a red para descargar datos más simplificadas. La construción de la url de llamadas es + simple
 - **Binding** => Eliminar código repetitivo en la vinculación de código con las views del xml.
 - **KodeIn** => Inyeccion de dependecias.
-- **Glide**  => Evitar parcear un stream de datos a Bitmap en la descarga de las imagenes desde http. Tiene Cache de imagen y aporta funciona para convertir a Imagen circular. 
+- **Glide**  => Evitar parcear un stream de datos a Bitmap en la descarga de las imagenes desde http. Tiene Cache de imagen y aporta funcionalidad para convertir a Imagen circular. 
 - **Coroutines** => Trabajar en Async en background para no bloquear el hilo main de la UI y evitar dependencia de RxJava.
 - **Moshi** => Parceador de archivos JSon al modelo de datos. Modificar los nombres de variables que nos llegan desde modelo de red.
 - **Lifecycle** => Crea más facilmente el viewModel y con ella desacoplar la lógica de la vista. Flujo de información en una sola dirección.   
