@@ -1,18 +1,14 @@
 package com.example.wonka_staff
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
 import android.widget.SearchView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.example.wonka_staff.DI.NetworkDIModule
 import com.example.wonka_staff.Utils.Utils
 import com.example.wonka_staff.databinding.ActivityMainBinding
 import com.example.wonka_staff.models.Result
 import com.example.wonka_staff.viewModel.StaffViewModel
-import com.squareup.moshi.Moshi
-import okhttp3.OkHttpClient
 import org.kodein.di.DI
 import org.kodein.di.DIAware
 import org.kodein.di.android.di
@@ -20,6 +16,7 @@ import org.kodein.di.direct
 import org.kodein.di.instance
 import retrofit2.Retrofit
 
+//todo extraer a Utils este enum
 enum class genders(val letter: String) {
     Female("F"),
     Male("M"),
