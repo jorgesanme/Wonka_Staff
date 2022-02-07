@@ -3,8 +3,8 @@ package com.example.wonka_staff.models
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
-@JsonClass (generateAdapter = true)
-data class PersonModel (
+@JsonClass(generateAdapter = true)
+data class PersonModel(
     @Json(name = PersonModelName.LAST_NAME)
     val lastName: String,
     val description: String,
@@ -20,6 +20,7 @@ data class PersonModel (
     val gender: String,
     val email: String
 )
+
 object PersonModelName {
     const val FIRST_NAME = "first_name"
     const val LAST_NAME = "last_name"

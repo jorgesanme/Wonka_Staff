@@ -14,4 +14,7 @@ class Utils {
             dialog.show()
         }
     }
+    object Constants{
+        const val API_HEADER = "?page="
+    }
 }

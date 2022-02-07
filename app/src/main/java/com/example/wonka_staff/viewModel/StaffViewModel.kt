@@ -4,18 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.wonka_staff.Utils.Utils.Constants.API_HEADER
 import com.example.wonka_staff.genders
 import com.example.wonka_staff.models.PersonModel
 import com.example.wonka_staff.models.Result
 import com.example.wonka_staff.repository.WillyWonkaAPI
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import okhttp3.OkHttpClient
-import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
 
 class StaffViewModel(val api: WillyWonkaAPI) : ViewModel() {
 
@@ -36,7 +32,7 @@ class StaffViewModel(val api: WillyWonkaAPI) : ViewModel() {
     fun getStaffList(page: Int, gender: String, query: String?) {
         requestJob?.cancel()
         requestJob = viewModelScope.launch(Dispatchers.IO) {
-            val response = api.getStaffList("?page=$page")
+            val response = api.getStaffList(API_HEADER + page) //"?page=$page"
             if (gender == genders.Both.letter) {
                 if (query == null) {
                     filterList = response!!.results as MutableList<Result>
