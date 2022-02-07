@@ -32,7 +32,7 @@ class StaffViewModel(val api: WillyWonkaAPI) : ViewModel() {
     fun getStaffList(page: Int, gender: String, query: String?) {
         requestJob?.cancel()
         requestJob = viewModelScope.launch(Dispatchers.IO) {
-            val response = api.getStaffList(API_HEADER + page) //"?page=$page"
+            val response = api.getStaffList(API_HEADER + page)
             if (gender == genders.Both.letter) {
                 if (query == null) {
                     filterList = response!!.results as MutableList<Result>
